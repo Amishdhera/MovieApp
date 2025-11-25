@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function About({ mode }) {
   const skills = [
@@ -18,6 +19,20 @@ function About({ mode }) {
 
   const projects = [
     {
+      name: 'Rozana Ka Hisab',
+      description: 'A daily expense tracker with visual analytics and a clean UI, built using HTML, CSS, Bootstrap, and JavaScript to help users manage personal finances efficiently.',
+      tech: ['HTML', 'CSS', 'Bootstrap', 'JavaScript'],
+      link: 'https://amishdhera.github.io/Rozana-Ka-Hisab/loader'
+    },
+
+    {
+      name: 'Delicious Bites',
+      description: 'A modern one-page restaurant landing website built using HTML, CSS, and Bootstrap. Features include hero banner, menu cards, testimonials, and contact section.',
+      tech: ['HTML', 'CSS', 'Bootstrap', 'UI/UX'],
+      link: 'https://amishdhera.github.io/Delicious-Bites/'
+    },
+
+    {
       name: 'Portfolio App',
       description: 'Personal portfolio app built with Flutter showcasing projects and skills',
       tech: ['Flutter', 'Dart', 'Firebase'],
@@ -29,12 +44,7 @@ function About({ mode }) {
       tech: ['Flutter', 'Firebase', 'Maps API'],
       link: 'https://amishdhera.github.io/app/'
     },
-    {
-      name: 'Rozana Ka Hisab',
-      description: 'Daily expense tracker with analytics for personal finance management',
-      tech: ['HtmlCss', 'BootStrap', 'JavaScript'],
-      link: 'https://amishdhera.github.io/Rozana-Ka-Hisab/loader'
-    },
+
     {
       name: 'Tappy Number',
       description: 'Interactive number tapping game with score tracking and multiple difficulty levels',
@@ -42,35 +52,30 @@ function About({ mode }) {
       link: 'https://amishdhera.github.io/Tappy_Number/'
     },
     {
-  name: 'Greeting/Celebration App',
-  description: 'Beautiful celebration and greeting card application with custom messages and animations',
-  tech: ['Flutter', 'Firebase', 'Animations'],
-  link: 'https://amishdhera.github.io/wish_app/'
-},
-{
-    name: 'Currency Converter',
-    description: 'Real-time currency conversion app with live exchange rates and multiple currency support',
-    tech: ['Flutter', 'API Integration', 'Real-time Data'],
-    link: 'https://amishdhera.github.io/currency_converter/'
-  },
-  {
-  name: 'Pet Care TechWiz',
-  description: 'Team project - Comprehensive pet care platform with veterinary services and pet management',
-  tech: ['Team Project',  'Firebase', 'UI/UX'],
-  link: 'https://wahabniazi09.github.io/Pet-Care-TechWiz/'
-},
- {
-  name: 'NewPulse',
-  description: 'Modern news application with real-time updates, built with React Vite and news API integration',
-  tech: ['React', 'Vite', 'News API', 'Responsive Design'],
-  link: 'https://github.com/Amishdhera/NewPulse'
-},
-  {
-  name: 'Pet Care TechWiz',
-  description: 'Team project - Comprehensive pet care platform with veterinary services and pet management',
-  tech: ['Team Project', 'React', 'Firebase', 'UI/UX'],
-  link: 'https://wahabniazi09.github.io/Pet-Care-TechWiz/'
-}
+      name: 'Greeting/Celebration App',
+      description: 'Beautiful celebration and greeting card application with custom messages and animations',
+      tech: ['Flutter', 'Firebase', 'Animations'],
+      link: 'https://amishdhera.github.io/wish_app/'
+    },
+    {
+      name: 'Currency Converter',
+      description: 'Real-time currency conversion app with live exchange rates and multiple currency support',
+      tech: ['Flutter', 'API Integration', 'Real-time Data'],
+      link: 'https://amishdhera.github.io/currency_converter/'
+    },
+    {
+      name: 'Pet Care TechWiz',
+      description: 'Team project - Comprehensive pet care platform with veterinary services and pet management',
+      tech: ['Team Project', 'Firebase', 'UI/UX'],
+      link: 'https://wahabniazi09.github.io/Pet-Care-TechWiz/'
+    },
+    {
+      name: 'NewPulse',
+      description: 'Modern news application with real-time updates, built with React Vite and news API integration',
+      tech: ['React', 'Vite', 'News API', 'Responsive Design'],
+      link: 'https://github.com/Amishdhera/NewPulse'
+    },
+
   ];
 
   const stats = [
@@ -81,7 +86,7 @@ function About({ mode }) {
   ];
 
   return (
-    <div style={{ 
+    <div style={{
       minHeight: '100vh',
       background: mode ? '#ffffff' : '#000000',
       color: mode ? '#000000' : '#ffffff'
@@ -92,9 +97,9 @@ function About({ mode }) {
           <div className="col-lg-6 mb-5 mb-lg-0">
             <div className="text-center text-lg-start">
               <div className="mb-4">
-                <div 
+                <div
                   className="badge rounded-pill px-4 py-2 mb-3 fw-bold d-inline-block"
-                  style={{ 
+                  style={{
                     background: '#e50914',
                     color: 'white',
                     fontSize: '0.9rem'
@@ -105,27 +110,27 @@ function About({ mode }) {
                 <h1 className="display-4 fw-bold mb-3" style={{ color: '#e50914' }}>
                   Ameet Kumar <span style={{ color: mode ? '#000000' : '#ffffff' }}>Dhera</span>
                 </h1>
-                <p className="lead fw-semibold mb-4" style={{ 
+                <p className="lead fw-semibold mb-4" style={{
                   fontSize: '1.4rem',
                   color: mode ? '#666666' : '#cccccc'
                 }}>
                   Creating Digital Experiences That Matter
                 </p>
               </div>
-              
-              <p className="mb-5" style={{ 
+
+              <p className="mb-5" style={{
                 fontSize: '1.1rem',
                 color: mode ? '#666666' : '#cccccc',
                 lineHeight: '1.6'
               }}>
-                Passionate about creating beautiful, functional, and user-friendly applications. 
-                I specialize in Flutter mobile development and modern web technologies, 
+                Passionate about creating beautiful, functional, and user-friendly applications.
+                I specialize in Flutter mobile development and modern web technologies,
                 turning complex problems into simple, elegant solutions.
               </p>
-              
+
               <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                <a 
-                  href="#contact" 
+                <Link
+                  to="https://wa.me/923161103616"
                   className="btn fw-bold px-4 py-3 rounded-0 border-0"
                   style={{
                     background: '#e50914',
@@ -136,9 +141,9 @@ function About({ mode }) {
                   onMouseLeave={(e) => e.target.style.background = '#e50914'}
                 >
                   GET IN TOUCH
-                </a>
-                <a 
-                  href="#projects" 
+                </Link>
+                <a
+                  href="https://amishdhera.github.io/Appportfolio/"
                   className="btn fw-bold px-4 py-3 rounded-0 border-2"
                   style={{
                     borderColor: '#e50914',
@@ -160,10 +165,10 @@ function About({ mode }) {
               </div>
             </div>
           </div>
-          
+
           <div className="col-lg-6 text-center">
             <div className="position-relative d-inline-block">
-              <div 
+              <div
                 className="overflow-hidden"
                 style={{
                   border: '4px solid #e50914',
@@ -185,7 +190,7 @@ function About({ mode }) {
                     e.target.nextSibling.style.display = 'flex';
                   }}
                 />
-                <div 
+                <div
                   className="d-none align-items-center justify-content-center fw-bold display-4"
                   style={{
                     width: '400px',
@@ -210,7 +215,7 @@ function About({ mode }) {
             <div className="row g-4">
               {stats.map((stat, index) => (
                 <div className="col-md-3 col-sm-6" key={index}>
-                  <div 
+                  <div
                     className="p-4 text-center border"
                     style={{
                       background: mode ? '#ffffff' : '#000000',
@@ -241,7 +246,7 @@ function About({ mode }) {
             </h2>
             <div className="row g-4">
               <div className="col-md-6">
-                <div 
+                <div
                   className="p-4 h-100 border"
                   style={{
                     background: mode ? '#ffffff' : '#000000',
@@ -253,14 +258,14 @@ function About({ mode }) {
                 >
                   <h4 className="fw-bold mb-3" style={{ color: '#e50914' }}>EDUCATION & BACKGROUND</h4>
                   <p style={{ color: mode ? '#666666' : '#cccccc', lineHeight: '1.6' }}>
-                    Computer Science graduate with specialization in Mobile App Development 
-                    and Web Technologies. Continuously learning and adapting to new technologies 
+                    Computer Science graduate with specialization in Mobile App Development
+                    and Web Technologies. Continuously learning and adapting to new technologies
                     to create innovative solutions that solve real-world problems.
                   </p>
                 </div>
               </div>
               <div className="col-md-6">
-                <div 
+                <div
                   className="p-4 h-100 border"
                   style={{
                     background: mode ? '#ffffff' : '#000000',
@@ -272,8 +277,8 @@ function About({ mode }) {
                 >
                   <h4 className="fw-bold mb-3" style={{ color: '#e50914' }}>PASSION & VISION</h4>
                   <p style={{ color: mode ? '#666666' : '#cccccc', lineHeight: '1.6' }}>
-                    Passionate about creating applications that make a difference. 
-                    Believe in clean code, user-centric design, and continuous improvement 
+                    Passionate about creating applications that make a difference.
+                    Believe in clean code, user-centric design, and continuous improvement
                     to deliver exceptional digital experiences that users love.
                   </p>
                 </div>
@@ -291,7 +296,7 @@ function About({ mode }) {
             <div className="row g-4">
               {skills.map((skill, index) => (
                 <div className="col-md-6 col-lg-4" key={index}>
-                  <div 
+                  <div
                     className="p-4 border"
                     style={{
                       background: mode ? '#ffffff' : '#000000',
@@ -307,15 +312,15 @@ function About({ mode }) {
                         {skill.level}%
                       </span>
                     </div>
-                    <div 
+                    <div
                       className="progress"
-                      style={{ 
+                      style={{
                         height: '8px',
                         background: mode ? '#e9ecef' : '#333333',
                         borderRadius: '0px'
                       }}
                     >
-                      <div 
+                      <div
                         className="progress-bar"
                         style={{
                           width: `${skill.level}%`,
@@ -339,7 +344,7 @@ function About({ mode }) {
             <div className="row g-4">
               {projects.map((project, index) => (
                 <div className="col-md-6 col-lg-4" key={index}>
-                  <div 
+                  <div
                     className="p-4 h-100 border d-flex flex-column"
                     style={{
                       background: mode ? '#ffffff' : '#000000',
@@ -352,17 +357,17 @@ function About({ mode }) {
                     <h5 className="fw-bold mb-3" style={{ color: '#e50914' }}>
                       {project.name}
                     </h5>
-                    
+
                     <p style={{ color: mode ? '#666666' : '#cccccc' }} className="mb-3 flex-grow-1">
                       {project.description}
                     </p>
-                    
+
                     <div className="mb-3">
                       {project.tech.map((tech, techIndex) => (
-                        <span 
+                        <span
                           key={techIndex}
                           className="badge rounded-0 me-1 mb-2 px-3 py-2"
-                          style={{ 
+                          style={{
                             background: '#e50914',
                             color: 'white',
                             fontSize: '0.7rem'
@@ -372,8 +377,8 @@ function About({ mode }) {
                         </span>
                       ))}
                     </div>
-                    
-                    <a 
+
+                    <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -402,11 +407,11 @@ function About({ mode }) {
           </div>
         </div>
 
-      
+
       </div>
 
       {/* Footer */}
-      <footer 
+      <footer
         className="py-5 border-top"
         style={{
           background: mode ? '#ffffff' : '#000000',
@@ -418,11 +423,11 @@ function About({ mode }) {
             <div className="col-lg-12 text-center">
               <div className="d-flex flex-wrap gap-4 mb-3 justify-content-center">
                 {['Home', 'About', 'Movies'].map((item, index) => (
-                  <a 
+                  <a
                     key={index}
-                    href="#" 
+                    href="#"
                     className="text-decoration-none fw-bold"
-                    style={{ 
+                    style={{
                       color: '#e50914',
                       fontSize: '1rem',
                       transition: 'all 0.3s ease',
@@ -441,7 +446,7 @@ function About({ mode }) {
                   </a>
                 ))}
               </div>
-              <p className="mb-0" style={{ 
+              <p className="mb-0" style={{
                 color: mode ? '#666666' : '#cccccc',
                 fontSize: '1rem'
               }}>

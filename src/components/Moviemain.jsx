@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import Movie from './Movie';
 
@@ -5,8 +6,13 @@ function Moviemain({ mode, searchQuery = '' }) {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [inputMessage, setInputMessage] = useState('');
   const loader = useRef(null);
+  const chatContainerRef = useRef(null);
 
+  // Movie fetching code same as before
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
@@ -41,6 +47,39 @@ function Moviemain({ mode, searchQuery = '' }) {
     };
   }, [loading]);
 
+  // Chatbot functions
+  const handleSendMessage = () => {
+    if (inputMessage.trim() === '') return;
+
+    const userMessage = { text: inputMessage, sender: 'user' };
+    setMessages(prev => [...prev, userMessage]);
+    setInputMessage('');
+
+    // Auto bot response
+    setTimeout(() => {
+      const botResponse = getBotResponse(inputMessage);
+      setMessages(prev => [...prev, { text: botResponse, sender: 'bot' }]);
+    }, 1000);
+  };
+
+  const getBotResponse = (userMessage) => {
+    const message = userMessage.toLowerCase();
+    
+    if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+      return "Hello! I'm your movie assistant. How can I help you today?";
+    } else if (message.includes('movie') || message.includes('film')) {
+      return "I can help you find great movies! Try searching above or browse through our popular collection.";
+    } else if (message.includes('popular') || message.includes('trending')) {
+      return "Check out our popular movies section for the latest trending films!";
+    } else if (message.includes('help')) {
+      return "I can help you with movie recommendations, search tips, and general information about our movie app.";
+    } else if (message.includes('thank')) {
+      return "You're welcome! Enjoy exploring movies! 🎬";
+    } else {
+      return "I'm here to help with movie-related questions. Try asking about popular movies or how to search!";
+    }
+  };
+
   const filteredMovies = movies.filter(movie =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -49,7 +88,8 @@ function Moviemain({ mode, searchQuery = '' }) {
     <div className="container-fluid mt-4" style={{
       minHeight: '100vh',
       padding: '30px',
-      background: mode ? '#ffffff' : '#000000'
+      background: mode ? '#ffffff' : '#000000',
+      position: 'relative'
     }}>
       {/* Header Section */}
       <div className="text-center mb-5">
@@ -171,6 +211,125 @@ function Moviemain({ mode, searchQuery = '' }) {
           </p>
         </div>
       )}
+
+      {/* Chatbot */}
+      <div className="position-fixed" style={{ bottom: '20px', right: '20px', zIndex: 1050 }}>
+        {/* Chat Button */}
+        {!chatOpen && (
+          <button
+            onClick={() => setChatOpen(true)}
+            className="btn rounded-circle shadow-lg border-0"
+            style={{
+              width: '60px',
+              height: '60px',
+              background: '#e50914',
+              color: 'white',
+              fontSize: '1.5rem',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => e.target.style.background = '#ff0000'}
+            onMouseLeave={(e) => e.target.style.background = '#e50914'}
+          >
+            💬
+          </button>
+        )}
+
+        {/* Chat Window */}
+        {chatOpen && (
+          <div 
+            ref={chatContainerRef}
+            className="card shadow-lg border-0"
+            style={{
+              width: '350px',
+              height: '500px',
+              background: mode ? '#ffffff' : '#1a1a1a',
+              border: '2px solid #e50914'
+            }}
+          >
+            {/* Chat Header */}
+            <div 
+              className="card-header d-flex justify-content-between align-items-center border-0"
+              style={{ background: '#e50914', color: 'white' }}
+            >
+              <div className="d-flex align-items-center">
+                <span className="me-2">🤖</span>
+                <strong>Movie Assistant</strong>
+              </div>
+              <button
+                onClick={() => setChatOpen(false)}
+                className="btn btn-sm border-0"
+                style={{ color: 'white', fontSize: '1.2rem' }}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Chat Messages */}
+            <div 
+              className="card-body p-3 d-flex flex-column"
+              style={{ 
+                height: '400px', 
+                overflowY: 'auto',
+                background: mode ? '#f8f9fa' : '#2d3436'
+              }}
+            >
+              {messages.length === 0 ? (
+                <div className="text-center text-muted mt-5">
+                  <div style={{ fontSize: '3rem' }}>🎬</div>
+                  <p className="mt-2">Hello! I'm your movie assistant. Ask me anything about movies!</p>
+                </div>
+              ) : (
+                messages.map((message, index) => (
+                  <div
+                    key={index}
+                    className={`d-flex mb-3 ${message.sender === 'user' ? 'justify-content-end' : 'justify-content-start'}`}
+                  >
+                    <div
+                      className={`p-3 rounded-4 ${message.sender === 'user' 
+                        ? 'text-white' 
+                        : mode ? 'bg-light text-dark' : 'bg-dark text-light'
+                      }`}
+                      style={{
+                        maxWidth: '80%',
+                        background: message.sender === 'user' ? '#e50914' : 'transparent',
+                        border: message.sender === 'user' ? 'none' : `1px solid ${mode ? '#dee2e6' : '#495057'}`
+                      }}
+                    >
+                      {message.text}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Chat Input */}
+            <div className="card-footer border-0 p-3">
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control border-0"
+                  placeholder="Type your message..."
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  style={{
+                    background: mode ? '#ffffff' : '#2d3436',
+                    color: mode ? '#000000' : '#ffffff',
+                    border: `1px solid ${mode ? '#dee2e6' : '#495057'}`
+                  }}
+                />
+                <button
+                  onClick={handleSendMessage}
+                  className="btn border-0"
+                  style={{ background: '#e50914', color: 'white' }}
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
